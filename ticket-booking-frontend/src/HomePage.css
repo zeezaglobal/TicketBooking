@@ -1,0 +1,220 @@
+/* Global Styles */
+body {
+    font-family: 'Montserrat', sans-serif; /* Changed font family to a more modern one */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    color: #7b3a3a;
+}
+
+/* Home Page Container */
+.home-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center the content */
+    justify-content: center; /* Vertically center the content */
+    text-align: center; /* Ensure text is centered */
+    padding: 30px 20px;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+}
+
+/* Header Section */
+.header {
+    background: transparent; /* Gradient background */
+    color: #ffffff; /* White text for a brighter, bolder contrast */
+    padding: 60px 30px; /* Increased padding for more space */
+    border-radius: 30px;
+    margin-bottom: -80px;
+    margin-top: -30px; /* Slightly adjusted margin */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* More intense shadow for depth */
+    height: auto; /* Let the header adjust based on content */
+    text-align: center;
+    position: relative;
+}
+
+.header h2 {
+    font-family: 'Roboto', sans-serif; /* Modern font for header */
+    font-size: 60px; /* Large font size for more emphasis */
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff; /* White text */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+    
+    /* Add 3D shadow to the text */
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3),
+                 8px 8px 20px rgba(0, 0, 0, 0.2),
+                 12px 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Create a secondary text shadow effect using the ::before pseudo-element */
+.header h2::before {
+    content: attr(data-text); /* Using data-text for the duplicate text */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: #ff69b4; /* Pinkish color for the shadow text */
+    transform: translate(10px, 10px); /* Positioning shadow further down */
+    filter: blur(5px); /* Slight blur for the shadow effect */
+    font-weight: 700;
+    font-size: 60px;
+}
+
+
+/* Subheading styling */
+.header p {
+    font-size: 20px; /* Larger font for subheading */
+    color: #0a0189; /* Bright yellow text for contrast */
+    line-height: 1.6;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Light shadow to make the text pop */
+}
+
+/* Hover Effects on Header */
+.header:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Subtle glow effect on header */
+.header:hover h2 {
+    text-shadow: 2px 2px 15px rgba(255, 215, 0, 0.8); /* Glow effect on hover */
+}
+
+
+
+/* Events List */
+.events-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 25px;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    max-width: 1200px;
+    margin-top: 60px;
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+/* Event Cards */
+.event-card {
+    background-color:transparent; /* Slightly transparent white for cards */
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: -10px;
+    backdrop-filter: blur(8px); /* Adds a subtle blur effect for transparency */
+}
+
+/* Event Card Hover Effects */
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Link Styling */
+.event-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Event Image */
+.event-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 3px solid #f1f1f1;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Specific Background Images for Each Event */
+.event-image.music {
+    background-image: url('./music.jpg');
+}
+
+.event-image.art {
+    background-image: url('./art.jpg');
+}
+
+.event-image.food {
+    background-image: url('./food.jpg');
+}
+
+.event-image.tech {
+    background-image: url('./tech.jpg');
+}
+
+/* Event Title */
+.event-title {
+    font-family: 'Poppins', sans-serif; /* Modern, friendly font */
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    background-color: rgba(23, 0, 154, 0.6); /* Blue background */
+    color: rgb(255, 200, 18);
+    border-radius: 0 0 15px 15px;
+    margin-top: -5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Event Description */
+.event-description {
+    padding: 20px;
+    font-size: 16px;
+    color: #0adcfd;
+    line-height: 1.5;
+    font-weight: 300; /* Light font weight */
+    font-family: 'Open Sans', sans-serif; /* More readable font for descriptions */
+}
+
+/* Hover Effects on Cards */
+.event-card:hover .event-title {
+    background-color: #0b72f0;
+}
+
+.event-card:hover .event-description {
+    color: #0068fa;
+}
+
+/* Subtle Transition for Description Color */
+.event-description {
+    transition: color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 35px 20px;
+    }
+
+    .header h2 {
+        font-size: 32px;
+    }
+
+    .header p {
+        font-size: 16px;
+    }
+
+    .events-list {
+        flex-wrap: nowrap;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .event-card {
+        width: 250px;
+    }
+}

@@ -1,0 +1,10 @@
+/* App.css */
+
+/* Set background color for the entire webpage */
+body {
+  background-color: #46cccc; /* Light blue color */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./bgp.jpg');
+}
