@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <div className="home-page-container">
       <div className="header">
-        <h2>Welcome to the City of Events</h2>
+        <h2>Welcome to the events near you</h2>
         <p>Your place to experience the best events in town!</p>
       </div>
 
