@@ -13,7 +13,7 @@ body {
   /* Stylish container */
   .event-details-container {
     background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
-    background-image: url('./musics.jpg');
+  
     border-radius: 15px;
     padding: 30px;
     margin: 50px auto;
