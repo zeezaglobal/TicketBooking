@@ -1,15 +1,51 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
+import QRCode from "qrcode";
+import { useParams, useNavigate } from "react-router-dom";
 import "./EventDetails.css";
 
-function EventDetails() {
+const EventDetails = () => {
+  const { eventId } = useParams();
+  const [event, setEvent] = useState(null);
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [tickets, setTickets] = useState("");
+  const [qrCode, setQrCode] = useState(""); // To store the QR code base64 data
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEventDetails = async () => {
+      const mockEventData = {
+        1: { id: 1, title: "Music Concert", location: "City Center Hall" },
+        2: { id: 2, title: "Art Exhibition", location: "Gallery Hub" },
+      };
+      setEvent(mockEventData[eventId] || null);
+    };
+
+    fetchEventDetails();
+  }, [eventId]);
+
+  useEffect(() => {
+    // Generate the QR code when the event and user details are ready
+    if (event && name && email && phone) {
+      generateQRCode();
+    }
+  }, [event, name, email, phone]);
+
+  const generateQRCode = async () => {
+    try {
+      const qrCodeUrl = await QRCode.toDataURL(
+        `https://example.com/event/${event.id}?name=${name}&email=${email}&phone=${phone}`,
+        { errorCorrectionLevel: "H" }
+      );
+      setQrCode(qrCodeUrl);
+    } catch (error) {
+      console.error("Error generating QR code:", error);
+    }
+  };
 
   const handleNext = () => {
     if (step === 1 && (!name || !email || !phone)) {
@@ -24,7 +60,16 @@ function EventDetails() {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      navigate("/payment");
+      navigate("/payment", {
+        state: {
+          event,
+          name,
+          email,
+          phone,
+          date,
+          tickets,
+        },
+      });
     }
   };
 
@@ -34,11 +79,35 @@ function EventDetails() {
     }
   };
 
+  const handlePrintPDF = () => {
+    const doc = new jsPDF();
+    doc.text(`Event Details: ${event.title}`, 10, 10);
+    doc.text(`Location: ${event.location}`, 10, 20);
+    doc.text(`Name: ${name}`, 10, 30);
+    doc.text(`Email: ${email}`, 10, 40);
+    doc.text(`Phone: ${phone}`, 10, 50);
+    doc.text(`Date: ${date}`, 10, 60);
+    doc.text(`Tickets: ${tickets}`, 10, 70);
+
+    // Include the QR code image in the PDF
+    if (qrCode) {
+      doc.addImage(qrCode, "JPEG", 10, 80, 50, 50); // Adjust the size and position as needed
+    }
+
+    doc.save(`${event.title}_details.pdf`);
+  };
+
+  if (!event) {
+    return <p>Loading event details...</p>;
+  }
+
   return (
     <div className="event-details-container">
-      <h2>Event Registration</h2>
+      <h2>{event.title}</h2>
+      <p>
+        <strong>Location:</strong> {event.location}
+      </p>
 
-      {/* Progress Line */}
       <div className="progress-line">
         {[1, 2, 3].map((dot) => (
           <div
@@ -52,7 +121,6 @@ function EventDetails() {
         ))}
       </div>
 
-      {/* Step Content */}
       <div className="step-content">
         {step === 1 && (
           <div className="step step-1">
@@ -110,11 +178,23 @@ function EventDetails() {
         {step === 3 && (
           <div className="step step-3">
             <p>You're ready to proceed to the payment page!</p>
+
+            {/* Display QR code if generated */}
+            {qrCode && (
+              <div className="qr-code">
+                <img src={qrCode} alt="QR Code" style={{ width: 120 }} />
+              </div>
+            )}
+
+            <div className="print-button">
+              <button onClick={handlePrintPDF} className="print-btn">
+                Print PDF
+              </button>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="button-group">
         {step > 1 && (
           <button className="back-button" onClick={handleBack}>
@@ -127,6 +207,6 @@ function EventDetails() {
       </div>
     </div>
   );
-}
+};
 
 export default EventDetails;
