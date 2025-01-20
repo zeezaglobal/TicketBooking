@@ -1,107 +1,117 @@
 /* General styles for the page */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('./art.jpg'); /* Replace with your image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-  }
-  
-  /* Stylish container */
-  .event-details-container {
-    background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
-  
-    border-radius: 15px;
-    padding: 30px;
-    margin: 50px auto;
-    max-width: 700px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  /* Progress Line */
-  .progress-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  
-  .progress-dot {
-    width: 30px;
-    height: 30px;
-    background-color: #ddd;
-    border-radius: 50%;
-    position: relative;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  /* Active Dot - Brighter Color */
-  .progress-dot.active {
-    background-color: #007bff;
-    transform: scale(1.2); /* Make active dot slightly bigger */
-  }
-  
-  /* Inactive Dot - Dimmer Color */
-  .progress-dot.inactive {
-    background-color: #bbb;
-    opacity: 0.6; /* Dim inactive dots */
-  }
-  
-  /* Progress Labels */
-  .progress-label {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
-    color: #555;
-  }
-  
-  /* Step Content */
-  .step-content {
-    margin-bottom: 30px;
-  }
-  
-  .input-field {
-    display: block;
-    width: 80%;
-    padding: 10px;
-    margin: 15px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .input-field:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
-  
-  /* Buttons */
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .next-button,
-  .back-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .next-button:hover,
-  .back-button:hover {
-    background-color: #0056b3;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./art.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+}
+
+/* Stylish container */
+.event-details-container {
+  background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 50px auto;
+  max-width: 700px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Progress Line */
+.progress-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.progress-dot {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: relative;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Active Dot - Brighter Color */
+.progress-dot.active {
+  background-color: #007bff;
+  transform: scale(1.2); /* Make active dot slightly bigger */
+}
+
+/* Inactive Dot - Dimmer Color */
+.progress-dot.inactive {
+  background-color: #bbb;
+  opacity: 0.6; /* Dim inactive dots */
+}
+
+/* Progress Labels */
+.progress-label {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #555;
+}
+
+/* Step Content */
+.step-content {
+  margin-bottom: 30px;
+  margin-left: -10px;
+}
+
+/* Align labels to the left */
+.step label {
+  display: block;
+  text-align: left;  /* Align labels to the left */
+  margin-left: 20px; /* Adjust the margin as needed */
+  font-size: 16px;
+  color: #333;
+}
+
+/* Input Fields */
+.input-field {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin: 15px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center; /* Keep text inside input centered */
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.next-button,
+.back-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.next-button:hover,
+.back-button:hover {
+  background-color: #0056b3;
+}
