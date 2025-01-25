@@ -1,132 +1,127 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./EventDetails.css";
 
-function EventDetails() {
-  const [step, setStep] = useState(1);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setDate] = useState("");
-  const [tickets, setTickets] = useState("");
+const EventDetails = () => {
   const navigate = useNavigate();
 
-  const handleNext = () => {
-    if (step === 1 && (!name || !email || !phone)) {
-      alert("Please fill in all fields before proceeding.");
-      return;
-    }
-    if (step === 2 && (!date || !tickets)) {
-      alert("Please select a date and number of tickets.");
-      return;
-    }
+  const events = [
+    {
+      id: 1,
+      category: "Movies",
+      title: "The Galactic Chronicles: A Sci-Fi Adventure",
+      subtitle: "Exclusive Premiere Night",
+      description:
+        "Experience the most anticipated sci-fi movie of the year with stunning visuals and a gripping storyline.",
+      event_date: "2025-03-15",
+      venue: "Sudbury Theatre Centre, Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 2,
+      category: "Events",
+      title: "Sudbury Food & Culture Fest",
+      subtitle: "A Celebration of Global Flavors",
+      description:
+        "Join us for a day filled with food stalls, live music, and cultural performances from around the world.",
+      event_date: "2025-04-22",
+      venue: "Bell Park, Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 3,
+      category: "Shows",
+      title: "Broadway Nights: A Musical Journey",
+      subtitle: "Live at the Grand Stage",
+      description:
+        "Experience the magic of Broadway with stellar performances of timeless classics.",
+      event_date: "2025-05-10",
+      venue: "Grand Concert Hall, Winnipeg, MB",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 4,
+      category: "Sports",
+      title: "Sudbury Marathon 2025",
+      subtitle: "Run for the Community",
+      description:
+        "Participate in Sudbury’s annual marathon event featuring 5k, 10k, and full marathon categories.",
+      event_date: "2025-06-02",
+      venue: "Downtown Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 5,
+      category: "Movies",
+      title: "Retro Cinema Night: The Classics",
+      subtitle: "Relive Iconic Movie Moments",
+      description:
+        "Enjoy a night of classic cinema under the stars with movies from the golden age of Hollywood.",
+      event_date: "2025-07-05",
+      venue: "Outdoor Cinema Park, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 6,
+      category: "Sports",
+      title: "Pro Wrestling Championship 2025",
+      subtitle: "Battle of the Titans",
+      description:
+        "Witness world-class wrestlers compete for the ultimate championship title.",
+      event_date: "2025-08-12",
+      venue: "Scotiabank Arena, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 7,
+      category: "Events",
+      title: "Tech Expo 2025",
+      subtitle: "Innovating Tomorrow",
+      description:
+        "Discover the latest technological advancements and network with industry leaders at this annual tech exhibition.",
+      event_date: "2025-09-15",
+      venue: "Metro Toronto Convention Centre, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 8,
+      category: "Shows",
+      title: "Comedy Night with John Doe",
+      subtitle: "Laugh Out Loud",
+      description:
+        "Join us for an evening of hilarity with renowned comedian John Doe and his side-splitting act.",
+      event_date: "2025-10-18",
+      venue: "Laugh Factory, Vancouver, BC",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+  ];
 
-    if (step < 3) {
-      setStep(step + 1);
-    } else {
-      navigate("/payment");
-    }
-  };
+  const [showData, setShowData] = useState(false);
 
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
+  const handleShowData = () => {
+    setShowData(!showData);
   };
 
   return (
     <div className="event-details-container">
-      <h2>Event Registration</h2>
-
-      {/* Progress Line */}
-      <div className="progress-line">
-        {[1, 2, 3].map((dot) => (
-          <div
-            key={dot}
-            className={`progress-dot ${dot === step ? "active" : "inactive"}`}
-          >
-            <span className="progress-label">
-              {dot === 1 ? "Name" : dot === 2 ? "Details" : "Payment"}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Step Content */}
-      <div className="step-content">
-        {step === 1 && (
-          <div className="step step-1">
-            <label>Name:</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              className="input-field"
-            />
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="input-field"
-            />
-            <label>Phone:</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter your phone number"
-              className="input-field"
-            />
-          </div>
-        )}
-
-        {step === 2 && (
-          <div className="step step-2">
-            <label>Date:</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="input-field"
-            />
-            <label>Number of Tickets:</label>
-            <select
-              value={tickets}
-              onChange={(e) => setTickets(e.target.value)}
-              className="input-field"
-            >
-              <option value="">Select tickets</option>
-              <option value="1">1 Ticket</option>
-              <option value="2">2 Tickets</option>
-              <option value="3">3 Tickets</option>
-              <option value="4">4 Tickets</option>
-            </select>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="step step-3">
-            <p>You're ready to proceed to the payment page!</p>
-          </div>
-        )}
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className="button-group">
-        {step > 1 && (
-          <button className="back-button" onClick={handleBack}>
-            Back
-          </button>
-        )}
-        <button className="next-button" onClick={handleNext}>
-          {step < 3 ? "Next" : "Go to Payment"}
-        </button>
-      </div>
+      <h2>Events</h2>
+      <button onClick={handleShowData} className="show-data-button">
+        {showData ? "Hide Events" : "Show Events"}
+      </button>
+      {showData && (
+        <pre style={{ textAlign: "left", marginTop: "20px" }}>
+          {JSON.stringify(events, null, 2)}
+        </pre>
+      )}
     </div>
   );
-}
+};
 
 export default EventDetails;
