@@ -1,220 +1,286 @@
 /* Global Styles */
-body {
-    font-family: 'Montserrat', sans-serif; /* Changed font family to a more modern one */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    color: #7b3a3a;
-}
 
-/* Home Page Container */
-.home-page-container {
+
+/* Main Parent Container */
+.main-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Horizontally center the content */
-    justify-content: center; /* Vertically center the content */
-    text-align: center; /* Ensure text is centered */
-    padding: 30px 20px;
-    margin-top: -50px;
-    margin-bottom: 20px;
-    min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
-}
-
-/* Header Section */
-.header {
-    background: transparent; /* Gradient background */
-    color: #ffffff; /* White text for a brighter, bolder contrast */
-    padding: 60px 30px; /* Increased padding for more space */
-    border-radius: 30px;
-    margin-bottom: -80px;
-    margin-top: -30px; /* Slightly adjusted margin */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* More intense shadow for depth */
-    height: auto; /* Let the header adjust based on content */
-    text-align: center;
-    position: relative;
-}
-
-.header h2 {
-    font-family: 'Roboto', sans-serif; /* Modern font for header */
-    font-size: 60px; /* Large font size for more emphasis */
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #ffffff; /* White text */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    z-index: 1;
+    align-items: center;
+    justify-content: flex-start; /* Align to the top */
+    min-height: 100vh;
+    padding: 0;
     
-    /* Add 3D shadow to the text */
-    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3),
-                 8px 8px 20px rgba(0, 0, 0, 0.2),
-                 12px 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Create a secondary text shadow effect using the ::before pseudo-element */
-.header h2::before {
-    content: attr(data-text); /* Using data-text for the duplicate text */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    color: #ff69b4; /* Pinkish color for the shadow text */
-    transform: translate(10px, 10px); /* Positioning shadow further down */
-    filter: blur(5px); /* Slight blur for the shadow effect */
-    font-weight: 700;
-    font-size: 60px;
+/* Top Categories Section */
+/* Top Categories Section */
+.top-categories {
+  width: 100%;
+  background-color: #fafafa;
+  padding: 20px 0; /* Adjusted padding */
+  text-align: center;
+  color: rgb(173, 24, 24);
+  margin: 0; /* Ensures it touches the top */
+  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative; /* Makes it a reference point for absolute positioning */
+  display: flex; /* Enable flexbox */
+   /* Space out items */
+  align-items: center; /* Center items vertically */
+  padding-left: -50px; /* Add padding to the left */
+  padding-right: 400px; /* Add padding to the right */
 }
 
-
-/* Subheading styling */
-.header p {
-    font-size: 20px; /* Larger font for subheading */
-    color: #0a0189; /* Bright yellow text for contrast */
-    line-height: 1.6;
-    font-weight: 400;
-    font-style: italic;
-    margin-top: 10px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Light shadow to make the text pop */
+/* Logo on the Left */
+.top-logo {
+  display: flex;
+  justify-content: flex-start; /* Align the logo to the left */
+  align-items: center; /* Center the logo vertically */
+  flex: 1; /* Allow it to take available space */
+  
+  margin-left: 250px;
 }
 
-/* Hover Effects on Header */
-.header:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Subtle glow effect on header */
-.header:hover h2 {
-    text-shadow: 2px 2px 15px rgba(255, 215, 0, 0.8); /* Glow effect on hover */
+/* Logo Styling */
+.top-logo img {
+  width: 50px; /* Adjust logo size */
+  height: auto;
 }
 
 
-
-/* Events List */
-.events-list {
+/* Categories Row (Links) */
+.categories-row {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 25px;
     justify-content: center;
-    width: 100%;
-    overflow-x: auto;
-    max-width: 1200px;
-    margin-top: 60px;
-    padding-bottom: 40px;
-    margin-bottom: 10px;
+    gap: 50px;
+    margin-left: 600px;
+    
 }
 
-/* Event Cards */
-.event-card {
-    background-color:transparent; /* Slightly transparent white for cards */
-    border-radius: 30px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    width: 300px;
-    transition: transform 0.3s ease-in-out;
-    margin-top: -10px;
-    backdrop-filter: blur(8px); /* Adds a subtle blur effect for transparency */
-}
-
-/* Event Card Hover Effects */
-.event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Link Styling */
-.event-link {
+.category-link {
+    font-family: 'Roboto', sans-serif; /* Font family updated to Roboto */
+   
+    font-weight: 400; /* Font weight updated */
+    line-height: 35.16px; /* Line height updated */
+    letter-spacing: 0.1px; /* Letter spacing adjusted */
+    text-align: left; /* Text alignment updated */
+    text-underline-position: from-font; /* Underline position set */
+    text-decoration-skip-ink: none; /* Skip ink for text-decoration disabled */
+    color: #000000;
     text-decoration: none;
-    color: inherit;
+    padding: 20px 20px;
+    margin-top: -20px;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 5px;
 }
 
-/* Event Image */
-.event-image {
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    border-bottom: 3px solid #f1f1f1;
-    border-radius: 15px 15px 0 0;
+    
+
+
+.category-link:hover {
+    color: #fff;
+    background-color: #ff69b4; /* Highlight color */
 }
 
-/* Specific Background Images for Each Event */
-.event-image.music {
-    background-image: url('./music.jpg');
-}
-
-.event-image.art {
-    background-image: url('./art.jpg');
-}
-
-.event-image.food {
-    background-image: url('./food.jpg');
-}
-
-.event-image.tech {
-    background-image: url('./tech.jpg');
-}
-
-/* Event Title */
-.event-title {
-    font-family: 'Poppins', sans-serif; /* Modern, friendly font */
-    font-size: 24px;
+/* Top Container */
+/* Top Container */
+.top-container {
+    width: 1400px;
+    background: linear-gradient(90deg, #D73C3C 0%, #220101 55.5%, #000000 100%);
+    padding: 20px 50px; /* Add padding for spacing */
+    display: flex; /* Enable flexbox */
+    justify-content: space-between; /* Push content to edges */
+    align-items: center; /* Align items vertically */
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: white; /* Ensure text is visible */
+    height: 80px;
+  }
+  
+  /* Header Left Section */
+  .header-left {
+    text-align: left;
+    font-size: 28px;
     font-weight: bold;
-    padding: 20px;
-    background-color: rgba(23, 0, 154, 0.6); /* Blue background */
-    color: rgb(255, 200, 18);
-    border-radius: 0 0 15px 15px;
-    margin-top: -5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    margin-left: 40px;
+  }
+  
+  /* Header Right Section */
+.header-right {
+    text-align: right; /* Align text to the right */
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+    font-size: 30px; /* Set font size */
+    font-weight: 700; /* Set font weight */
+    line-height: 53.91px; /* Set line height */
+    letter-spacing: 0.1px; /* Adjust letter spacing */
+    text-underline-position: from-font; /* Underline position */
+    text-decoration-skip-ink: none; /* Prevent skipping ink for decoration */
+    color: white; /* Ensure visibility on the background */
+  }
+  
+  
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .top-container {
+      flex-direction: column; /* Stack items vertically */
+      text-align: center; /* Center text */
+    }
+  
+    .header-left,
+    .header-right {
+      text-align: center; /* Center text on smaller screens */
+      margin-bottom: 10px;
+    }
+  }
+  
+
+/* Header Title */
+.header h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 50px;
+    margin-top: -50px;
 }
 
-/* Event Description */
-.event-description {
-    padding: 20px;
+/* Header Subtitle */
+.header p {
+    font-size: 18px;
+    font-style: italic;
+    color: white;
+}
+
+/* Content Container */
+.content-container {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end; /* Align right */
+    padding-right: 20px; /* Right padding */
+}
+
+/* Contact Us Box */
+.contact-us-box {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Keeps it inside the .top-categories container */
+    right: 20px;
+    margin-top: 10px;
+    top: 20px; /* Now it is aligned with the top of the page */
+}
+
+.contact-us-box p {
+    margin: 0;
     font-size: 16px;
-    color: #0adcfd;
-    line-height: 1.5;
-    font-weight: 300; /* Light font weight */
-    font-family: 'Open Sans', sans-serif; /* More readable font for descriptions */
-}
-
-/* Hover Effects on Cards */
-.event-card:hover .event-title {
-    background-color: #0b72f0;
-}
-
-.event-card:hover .event-description {
-    color: #0068fa;
-}
-
-/* Subtle Transition for Description Color */
-.event-description {
-    transition: color 0.3s ease;
+    font-weight: bold;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header {
-        padding: 35px 20px;
+    .categories-row {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .header h2 {
-        font-size: 32px;
-    }
-
-    .header p {
+    .category-link {
         font-size: 16px;
+        padding: 8px 16px;
     }
 
-    .events-list {
-        flex-wrap: nowrap;
-        gap: 15px;
+    .contact-us-box {
+        width: 80%;
+        text-align: center;
+        position: static;
         margin-top: 20px;
     }
-
-    .event-card {
-        width: 250px;
-    }
 }
+/* Bottom Boxes Container */
+/* Container for Bottom Boxes */
+/* Styling for the bottom boxes container */
+.bottom-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: -60px;
+    padding: -50px;
+  }
+  /* Main Logo Styling */
+
+
+  
+  /* Styling for each box */
+  .bottom-box {
+    width: 430px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 5px;
+  }
+  
+  .bottom-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Event image styling */
+  .event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* Event title styling */
+  .bottom-box h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Event subtitle styling */
+  .bottom-box h4 {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 5px 0;
+    color: #666;
+    text-align: center;
+  }
+  
+  /* Event description */
+  .bottom-box p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Styling for event details (date and venue) */
+  .bottom-box p strong {
+    color: #333;
+  }
+  
+  /* Section title */
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+  }
+  

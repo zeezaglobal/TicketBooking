@@ -1,210 +1,125 @@
-import React, { useState, useEffect } from "react";
-import { jsPDF } from "jspdf";
-import QRCode from "qrcode";
-import { useParams, useNavigate } from "react-router-dom";
-import "./EventDetails.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EventDetails = () => {
-  const { eventId } = useParams();
-  const [event, setEvent] = useState(null);
-  const [step, setStep] = useState(1);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setDate] = useState("");
-  const [tickets, setTickets] = useState("");
-  const [qrCode, setQrCode] = useState(""); // To store the QR code base64 data
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchEventDetails = async () => {
-      const mockEventData = {
-        1: { id: 1, title: "Music Concert", location: "City Center Hall" },
-        2: { id: 2, title: "Art Exhibition", location: "Gallery Hub" },
-      };
-      setEvent(mockEventData[eventId] || null);
-    };
+  const events = [
+    {
+      id: 1,
+      category: "Movies",
+      title: "The Galactic Chronicles: A Sci-Fi Adventure",
+      subtitle: "Exclusive Premiere Night",
+      description:
+        "Experience the most anticipated sci-fi movie of the year with stunning visuals and a gripping storyline.",
+      event_date: "2025-03-15",
+      venue: "Sudbury Theatre Centre, Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 2,
+      category: "Events",
+      title: "Sudbury Food & Culture Fest",
+      subtitle: "A Celebration of Global Flavors",
+      description:
+        "Join us for a day filled with food stalls, live music, and cultural performances from around the world.",
+      event_date: "2025-04-22",
+      venue: "Bell Park, Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 3,
+      category: "Shows",
+      title: "Broadway Nights: A Musical Journey",
+      subtitle: "Live at the Grand Stage",
+      description:
+        "Experience the magic of Broadway with stellar performances of timeless classics.",
+      event_date: "2025-05-10",
+      venue: "Grand Concert Hall, Winnipeg, MB",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 4,
+      category: "Sports",
+      title: "Sudbury Marathon 2025",
+      subtitle: "Run for the Community",
+      description:
+        "Participate in Sudbury’s annual marathon event featuring 5k, 10k, and full marathon categories.",
+      event_date: "2025-06-02",
+      venue: "Downtown Sudbury, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 5,
+      category: "Movies",
+      title: "Retro Cinema Night: The Classics",
+      subtitle: "Relive Iconic Movie Moments",
+      description:
+        "Enjoy a night of classic cinema under the stars with movies from the golden age of Hollywood.",
+      event_date: "2025-07-05",
+      venue: "Outdoor Cinema Park, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 6,
+      category: "Sports",
+      title: "Pro Wrestling Championship 2025",
+      subtitle: "Battle of the Titans",
+      description:
+        "Witness world-class wrestlers compete for the ultimate championship title.",
+      event_date: "2025-08-12",
+      venue: "Scotiabank Arena, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 7,
+      category: "Events",
+      title: "Tech Expo 2025",
+      subtitle: "Innovating Tomorrow",
+      description:
+        "Discover the latest technological advancements and network with industry leaders at this annual tech exhibition.",
+      event_date: "2025-09-15",
+      venue: "Metro Toronto Convention Centre, Toronto, ON",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+      id: 8,
+      category: "Shows",
+      title: "Comedy Night with John Doe",
+      subtitle: "Laugh Out Loud",
+      description:
+        "Join us for an evening of hilarity with renowned comedian John Doe and his side-splitting act.",
+      event_date: "2025-10-18",
+      venue: "Laugh Factory, Vancouver, BC",
+      image_url:
+        "https://images.pexels.com/photos/8952192/pexels-photo-8952192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+  ];
 
-    fetchEventDetails();
-  }, [eventId]);
+  const [showData, setShowData] = useState(false);
 
-  useEffect(() => {
-    // Generate the QR code when the event and user details are ready
-    if (event && name && email && phone) {
-      generateQRCode();
-    }
-  }, [event, name, email, phone]);
-
-  const generateQRCode = async () => {
-    try {
-      const qrCodeUrl = await QRCode.toDataURL(
-        `https://example.com/event/${event.id}?name=${name}&email=${email}&phone=${phone}`,
-        { errorCorrectionLevel: "H" }
-      );
-      setQrCode(qrCodeUrl);
-    } catch (error) {
-      console.error("Error generating QR code:", error);
-    }
+  const handleShowData = () => {
+    setShowData(!showData);
   };
-
-  const handleNext = () => {
-    if (step === 1 && (!name || !email || !phone)) {
-      alert("Please fill in all fields before proceeding.");
-      return;
-    }
-    if (step === 2 && (!date || !tickets)) {
-      alert("Please select a date and number of tickets.");
-      return;
-    }
-
-    if (step < 3) {
-      setStep(step + 1);
-    } else {
-      navigate("/payment", {
-        state: {
-          event,
-          name,
-          email,
-          phone,
-          date,
-          tickets,
-        },
-      });
-    }
-  };
-
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
-  };
-
-  const handlePrintPDF = () => {
-    const doc = new jsPDF();
-    doc.text(`Event Details: ${event.title}`, 10, 10);
-    doc.text(`Location: ${event.location}`, 10, 20);
-    doc.text(`Name: ${name}`, 10, 30);
-    doc.text(`Email: ${email}`, 10, 40);
-    doc.text(`Phone: ${phone}`, 10, 50);
-    doc.text(`Date: ${date}`, 10, 60);
-    doc.text(`Tickets: ${tickets}`, 10, 70);
-
-    // Include the QR code image in the PDF
-    if (qrCode) {
-      doc.addImage(qrCode, "JPEG", 10, 80, 50, 50); // Adjust the size and position as needed
-    }
-
-    doc.save(`${event.title}_details.pdf`);
-  };
-
-  if (!event) {
-    return <p>Loading event details...</p>;
-  }
 
   return (
     <div className="event-details-container">
-      <h2>{event.title}</h2>
-      <p>
-        <strong>Location:</strong> {event.location}
-      </p>
-
-      <div className="progress-line">
-        {[1, 2, 3].map((dot) => (
-          <div
-            key={dot}
-            className={`progress-dot ${dot === step ? "active" : "inactive"}`}
-          >
-            <span className="progress-label">
-              {dot === 1 ? "Name" : dot === 2 ? "Details" : "Payment"}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="step-content">
-        {step === 1 && (
-          <div className="step step-1">
-            <label>Name:</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              className="input-field"
-            />
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="input-field"
-            />
-            <label>Phone:</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter your phone number"
-              className="input-field"
-            />
-          </div>
-        )}
-
-        {step === 2 && (
-          <div className="step step-2">
-            <label>Date:</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="input-field"
-            />
-            <label>Number of Tickets:</label>
-            <select
-              value={tickets}
-              onChange={(e) => setTickets(e.target.value)}
-              className="input-field"
-            >
-              <option value="">Select tickets</option>
-              <option value="1">1 Ticket</option>
-              <option value="2">2 Tickets</option>
-              <option value="3">3 Tickets</option>
-              <option value="4">4 Tickets</option>
-            </select>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="step step-3">
-            <p>You're ready to proceed to the payment page!</p>
-
-            {/* Display QR code if generated */}
-            {qrCode && (
-              <div className="qr-code">
-                <img src={qrCode} alt="QR Code" style={{ width: 120 }} />
-              </div>
-            )}
-
-            <div className="print-button">
-              <button onClick={handlePrintPDF} className="print-btn">
-                Print PDF
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="button-group">
-        {step > 1 && (
-          <button className="back-button" onClick={handleBack}>
-            Back
-          </button>
-        )}
-        <button className="next-button" onClick={handleNext}>
-          {step < 3 ? "Next" : "Go to Payment"}
-        </button>
-      </div>
+      <h2>Events</h2>
+      <button onClick={handleShowData} className="show-data-button">
+        {showData ? "Hide Events" : "Show Events"}
+      </button>
+      {showData && (
+        <pre style={{ textAlign: "left", marginTop: "20px" }}>
+          {JSON.stringify(events, null, 2)}
+        </pre>
+      )}
     </div>
   );
 };

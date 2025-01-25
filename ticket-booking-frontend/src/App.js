@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div>
         <header>
-          <h1>Event Management System</h1>
+          <h1></h1>
         </header>
         <main>
           <Routes>
